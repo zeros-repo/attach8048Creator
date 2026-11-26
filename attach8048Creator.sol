@@ -37,7 +37,18 @@ contract attach8048 is Ownable{
             bytes memory temp = bytes('{"image":"onchain:image/svg+xml?key=svg"}');
             metadatas[tokenId]["metadata_uri"] = temp;
             emit MetadataSet(tokenId, "metadata_uri", "metadata_uri", temp);
-            
+        }
+
+        if (metadatas[tokenId]["metadata_uri"].length == 0 && keccak256(bytes(key)) == keccak256(bytes("png"))) {
+            bytes memory temp = bytes('{"image":"onchain:image/png?key=png"}');
+            metadatas[tokenId]["metadata_uri"] = temp;
+            emit MetadataSet(tokenId, "metadata_uri", "metadata_uri", temp);
+        }
+
+        if (metadatas[tokenId]["metadata_uri"].length == 0 && keccak256(bytes(key)) == keccak256(bytes("jpeg"))) {
+            bytes memory temp = bytes('{"image":"onchain:image/jpeg?key=jpeg"}');
+            metadatas[tokenId]["metadata_uri"] = temp;
+            emit MetadataSet(tokenId, "metadata_uri", "metadata_uri", temp);
         }
 
         emit MetadataUpdate(tokenId);
